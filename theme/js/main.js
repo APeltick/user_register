@@ -83,6 +83,7 @@ $('#inputRegions').on('change', function () {
       if (ans['type'] === 'area') {
         $('#areas').attr({"style":"display: block;"});
         $('#inputAreas').html(ans['data']).trigger("chosen:updated");
+        $('#cities').attr({"style":"display: none;"});
       } else {
         $('#cities').attr({"style":"display: block;"});
         $('#inputCities').html(ans['data']).trigger("chosen:updated");

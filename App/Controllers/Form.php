@@ -34,21 +34,20 @@ class Form
     $ter_id = $_POST['ter_id'];
     $territory = Territory::getById($ter_id);
     $data = '<option value=""></option>';
-//    $cap = ;
     $return = [];
     $locations = [];
 
-    if ($territory->ter_type_id == 1 && substr($territory->ter_id, 3) == '0100000') {
+    if ($territory->ter_type_id == 1 && substr($territory->ter_id, 3) === '0100000') {
       $locations = Territory::getArea($territory->reg_id);
       $return['type'] = 'area';
     }
 
-    if ($ter_id == '8000000000') {
+    if ($ter_id == '8000000000' || $ter_id == '8500000000') {
       $locations = Territory::getArea($territory->reg_id);
       $return['type'] = 'area';
     }
 
-    if ($territory->ter_type_id == 0 && $territory->reg_id !== '80') {
+    if ($territory->ter_type_id == 0 && $territory->reg_id !== '85' && $territory->reg_id !== '80') {
       $locations = Territory::getCities($territory->reg_id);
       $return['type'] = 'city';
     }
@@ -72,11 +71,9 @@ class Form
       $user = new User();
       if ($_POST['area_id']) {
         $user->ter_id = $_POST['area_id'];
-      }
-      elseif ($_POST['city_id']) {
+      } elseif ($_POST['city_id']) {
         $user->ter_id = $_POST['city_id'];
-      }
-      elseif ($_POST['reg_id']) {
+      } elseif ($_POST['reg_id']) {
         $user->ter_id = $_POST['reg_id'];
       }
       $user->name = $_POST['name'];
