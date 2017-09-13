@@ -29,35 +29,36 @@ class Form
     );
   }
 
-  public function loadCities()
+  public function load()
   {
-    $reg_id = $_POST['reg_id'];
-    $region = Territory::getById($reg_id);
+    $ter_id = $_POST['ter_id'];
+    $territory = Territory::getById($ter_id);
     $data = '<option value=""></option>';
-    if ($region->ter_type_id == 0) {
-      $cities = Territory::getCities($region->reg_id);
-      foreach ($cities as $city) {
-        $data .= '<option value="' . $city->ter_id . '">' .
-          $city->ter_name . '</option>';
-      }
-    }
-    return $return = ['data' => $data];
-  }
+    $cap = substr($territory->ter_id, 3);
+    $return = [];
+    $locations = [];
 
-  public function loadAreas()
-  {
-    $city_id = $_POST['city_id'];
-    $city = Territory::getById($city_id);
-    $cap = substr($city->ter_id, 3);
-    $data = '<option value=""></option>';
-    if ($city->ter_type_id == 1 && $cap == '0100000') {
-      $areas = Territory::getArea($city->reg_id);
-      foreach ($areas as $area) {
-        $data .= '<option value="' . $area->ter_id . '">' .
-          $area->ter_name . '</option>';
-      }
+    if ($territory->ter_type_id == 1 && $cap == '0100000') {
+      $locations = Territory::getArea($territory->reg_id);
+      $return['type'] = 'area';
     }
-    return $return = ['data' => $data];
+
+    if ($ter_id == '8000000000') {
+      $locations = Territory::getArea($territory->reg_id);
+      $return['type'] = 'area';
+    }
+
+    if ($territory->ter_type_id == 0) {
+      $locations = Territory::getCities($territory->reg_id);
+      $return['type'] = 'city';
+    }
+
+    foreach ($locations as $location) {
+      $data .= '<option value="' . $location->ter_id . '">' .
+        $location->ter_name . '</option>';
+    }
+    $return['data'] = $data;
+    return $return;
   }
 
   public function save()

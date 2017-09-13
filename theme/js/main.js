@@ -73,15 +73,20 @@ $('#register').bootstrapValidator({
 
 $('.chosen-select').chosen({width: "100%"});
 
-$('#inputSelect').on('change', function () {
+$('#inputRegions').on('change', function () {
   $.ajax({
     type: 'POST',
     url: 'index.php',
     dataType: 'json',
-    data:  {reg_id: $(this).val(), action: 'loadCities'},
+    data:  {ter_id: $(this).val(), action: 'load'},
     success: function (name) {
-      $('#cities').attr({"style":"display: block;"});
-      $('#inputCities').html(name['data']).trigger("chosen:updated");
+      if (name['type'] === 'area') {
+        $('#areas').attr({"style":"display: block;"});
+        $('#inputAreas').html(name['data']).trigger("chosen:updated");
+      } else {
+        $('#cities').attr({"style":"display: block;"});
+        $('#inputCities').html(name['data']).trigger("chosen:updated");
+      }
     }
   });
 });
@@ -91,7 +96,7 @@ $('#inputCities').on('change', function () {
     type: 'POST',
     url: 'index.php',
     dataType: 'json',
-    data:  {city_id: $(this).val(), action: 'loadAreas'},
+    data:  {ter_id: $(this).val(), action: 'load'},
     success: function (name) {
       $('#areas').attr({"style":"display: block;"});
       $('#inputAreas').html(name['data']).trigger("chosen:updated");

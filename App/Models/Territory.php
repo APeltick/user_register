@@ -25,8 +25,7 @@ class Territory
 
   public static function getRegions ()
   {
-    $db = Db::instance();
-    return $db->query(
+    return Db::instance()->query(
       'SELECT * FROM ' . self::$table . ' WHERE ter_level = 1',
       [],
       self::class
@@ -35,8 +34,7 @@ class Territory
 
   public static function getCities ($id)
   {
-    $db = Db::instance();
-    return $db->query(
+    return Db::instance()->query(
       'SELECT * FROM ' . self::$table . ' WHERE ter_type_id NOT IN(0,2,3) AND reg_id = :id',
       [':id' => $id],
       static::class
@@ -45,8 +43,7 @@ class Territory
 
   public static function getArea ($id)
   {
-    $db = Db::instance();
-    return $db->query(
+    return Db::instance()->query(
       'SELECT * FROM ' . self::$table . ' WHERE ter_type_id = 3 AND reg_id = :id',
       [':id' => $id],
       self::class
@@ -56,8 +53,7 @@ class Territory
 
   public static function getById ($id)
   {
-    $db = Db::instance();
-    $res = $db->query(
+    $res = Db::instance()->query(
       'SELECT * FROM ' . self::$table . ' WHERE ter_id = :id',
       [':id' => $id],
       self::class

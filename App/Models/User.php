@@ -17,8 +17,7 @@ class User
     }
 
   public static function getEmail($email) {
-    $db = Db::instance();
-    $res = $db->query(
+    $res = Db::instance()->query(
       'SELECT * FROM ' . self::$table . ' WHERE email = :email',
       [':email' => $email],
       self::class
@@ -28,8 +27,7 @@ class User
 
   public function save() {
     {
-      $db = Db::instance();
-      return $db->execute(
+      return Db::instance()->execute(
         'INSERT INTO ' . self::$table .
         '(name, email, ter_id) VALUES (:name,:email,:ter_id)',
         [':name' => $this->name, ':email' => $this->email, ':ter_id' => $this->ter_id]
