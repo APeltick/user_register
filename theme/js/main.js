@@ -58,13 +58,13 @@ $('#register').bootstrapValidator({
     url: 'index.php',
     dataType: 'json',
     data: data,
-    success: function (name) {
-      if (name['email'] === 'true') {
+    success: function (ans) {
+      if (ans['email'] === 'true') {
         $('#modal').addClass('in').attr({"style":"display: block;"});
-        $('#modal-body').html(name['data']);
+        $('#modal-body').html(ans['data']);
       }
-      if (name['email'] === 'false') {
-        $('#status').html(name['data']);
+      if (ans['email'] === 'false') {
+        $('#status').html(ans['data']);
       }
     }
   });
@@ -79,13 +79,13 @@ $('#inputRegions').on('change', function () {
     url: 'index.php',
     dataType: 'json',
     data:  {ter_id: $(this).val(), action: 'load'},
-    success: function (name) {
-      if (name['type'] === 'area') {
+    success: function (ans) {
+      if (ans['type'] === 'area') {
         $('#areas').attr({"style":"display: block;"});
-        $('#inputAreas').html(name['data']).trigger("chosen:updated");
+        $('#inputAreas').html(ans['data']).trigger("chosen:updated");
       } else {
         $('#cities').attr({"style":"display: block;"});
-        $('#inputCities').html(name['data']).trigger("chosen:updated");
+        $('#inputCities').html(ans['data']).trigger("chosen:updated");
       }
     }
   });
@@ -97,9 +97,9 @@ $('#inputCities').on('change', function () {
     url: 'index.php',
     dataType: 'json',
     data:  {ter_id: $(this).val(), action: 'load'},
-    success: function (name) {
+    success: function (ans) {
       $('#areas').attr({"style":"display: block;"});
-      $('#inputAreas').html(name['data']).trigger("chosen:updated");
+      $('#inputAreas').html(ans['data']).trigger("chosen:updated");
     }
   });
 });

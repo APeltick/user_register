@@ -12,7 +12,7 @@ class Form
 
   public function __construct()
   {
-    $this->view = $view = new View();
+    $this->view = new View();
   }
 
   public function action($action)
@@ -34,11 +34,11 @@ class Form
     $ter_id = $_POST['ter_id'];
     $territory = Territory::getById($ter_id);
     $data = '<option value=""></option>';
-    $cap = substr($territory->ter_id, 3);
+//    $cap = ;
     $return = [];
     $locations = [];
 
-    if ($territory->ter_type_id == 1 && $cap == '0100000') {
+    if ($territory->ter_type_id == 1 && substr($territory->ter_id, 3) == '0100000') {
       $locations = Territory::getArea($territory->reg_id);
       $return['type'] = 'area';
     }
@@ -48,7 +48,7 @@ class Form
       $return['type'] = 'area';
     }
 
-    if ($territory->ter_type_id == 0) {
+    if ($territory->ter_type_id == 0 && $territory->reg_id !== '80') {
       $locations = Territory::getCities($territory->reg_id);
       $return['type'] = 'city';
     }
