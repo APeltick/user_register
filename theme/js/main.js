@@ -74,6 +74,7 @@ $('#register').bootstrapValidator({
 $('.chosen-select').chosen({width: "100%"});
 
 $('#inputRegions').on('change', function () {
+  $('#areas').attr({"style":"display: none;"});
   $.ajax({
     type: 'POST',
     url: 'index.php',
