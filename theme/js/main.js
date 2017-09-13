@@ -99,8 +99,12 @@ $('#inputCities').on('change', function () {
     dataType: 'json',
     data:  {ter_id: $(this).val(), action: 'load'},
     success: function (ans) {
-      $('#areas').attr({"style":"display: block;"});
-      $('#inputAreas').html(ans['data']).trigger("chosen:updated");
+      if (ans['data'].length !== 26) {
+        $('#areas').attr({"style":"display: block;"});
+        $('#inputAreas').html(ans['data']).trigger("chosen:updated");
+      } else {
+        $('#areas').attr({"style":"display: none;"});
+      }
     }
   });
 });
