@@ -1,0 +1,59 @@
+<?php include 'header.phtml'?>
+<?php include 'modal.phtml'?>
+<div id="debug"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+            <div class="jumbotron">
+                <div id="status"></div>
+                <form class="form-horizontal" id="register">
+                    <div class="form-group">
+                        <label for="inputName" class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputName" name="name" placeholder="Name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputSelect" class="col-sm-2 control-label">Region</label>
+                        <div class="col-sm-10">
+                            <select class="form-control chosen-select" id="inputSelect" name="reg_id" data-placeholder="Choose a region..." >
+                                <option value=""></option>
+                              <?php foreach ($data['regions'] as $region) : ?>
+                                  <option value="<?php echo $region->ter_id?>"><?php echo $region->ter_name?></option>
+                              <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" style="display: none" id="cities">
+                        <label for="inputCities" class="col-sm-2 control-label">Cities</label>
+                        <div class="col-sm-10">
+                            <select class="chosen-select form-control" id="inputCities" name="city_id" data-placeholder="Choose a city..." >
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" style="display: none" id="areas">
+                        <label for="inputAreas" class="col-sm-2 control-label">Areas</label>
+                        <div class="col-sm-10">
+                            <select class="chosen-select form-control" id="inputAreas" name="area_id" data-placeholder="Choose a area..." >
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-1">
+                            <button type="submit" class="btn btn-default">Send</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<?php include 'footer.phtml'?>
